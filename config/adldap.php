@@ -63,7 +63,7 @@ return [
             |
             */
 
-            'schema' => Adldap\Schemas\ActiveDirectory::class,
+            'schema' => App\Ldap\Schemas\ActiveDirectory::class,
 
             /*
             |--------------------------------------------------------------------------

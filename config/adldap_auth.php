@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'resolver' => Adldap\Laravel\Auth\Resolver::class,
+    'resolver' => App\Ldap\Auth\Resolver::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -110,9 +110,9 @@ return [
 
     'scopes' => [
 
-        // Only allows users with a user principal name to authenticate.
+        // Only allows users with a uid to authenticate.
 
-        Adldap\Laravel\Scopes\UpnScope::class,
+        App\Ldap\Scopes\UserIdScope::class,
 
     ],
 
@@ -131,7 +131,7 @@ return [
         |
         */
 
-        'ldap' => 'userprincipalname',
+        'ldap' => 'uid',
 
         /*
         |--------------------------------------------------------------------------
@@ -147,7 +147,7 @@ return [
         |
         */
 
-        'eloquent' => 'email',
+        'eloquent' => 'name',
 
     ],
 
@@ -239,8 +239,16 @@ return [
 
     'sync_attributes' => [
 
-        'email' => 'userprincipalname',
-        'name' => 'cn',
+        // 'User model' => 'LDAP attribute',
+        'name'          => 'uid',
+        'display_name'  => 'cn',
+        'college'       => 'college',
+        'department'    => 'dept',
+        'firstname'     => 'givenname',
+        'lastname'      => 'sn',
+        'email'         => 'mail',
+        'title'         => 'title',
+        'pea'           => 'pea',
 
     ],
 
