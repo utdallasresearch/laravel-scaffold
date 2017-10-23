@@ -8,6 +8,12 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
                     <?php $user = Auth::user(); ?>
                     @if($user)
                     <p>You are logged in! You are user #{{ $user->id }}. Here's your info:</p>
