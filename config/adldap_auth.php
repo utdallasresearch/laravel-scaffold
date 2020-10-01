@@ -50,7 +50,7 @@ return [
     |
     */
 
-    'resolver' => App\Ldap\Auth\Resolver::class,
+    'resolver' => Adldap\Laravel\Auth\Resolver::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -112,7 +112,7 @@ return [
 
         // Only allows users with a uid to authenticate.
 
-        App\Ldap\Scopes\UserIdScope::class,
+        App\Ldap\Scopes\UsernameScope::class,
 
     ],
 
@@ -131,7 +131,7 @@ return [
         |
         */
 
-        'ldap' => 'uid',
+        'ldap' => env('LDAP_USERNAME', 'samaccountname'),
 
         /*
         |--------------------------------------------------------------------------
@@ -239,16 +239,7 @@ return [
 
     'sync_attributes' => [
 
-        // 'User model' => 'LDAP attribute',
-        'name'          => 'uid',
-        'display_name'  => 'cn',
-        'college'       => 'college',
-        'department'    => 'dept',
-        'firstname'     => 'givenname',
-        'lastname'      => 'sn',
-        'email'         => 'mail',
-        'title'         => 'title',
-        'pea'           => 'pea',
+        App\Ldap\Handlers\LdapAttributeHandler::class,
 
     ],
 

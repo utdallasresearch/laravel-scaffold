@@ -12,35 +12,33 @@ use \Adldap\Schemas\ActiveDirectory as AdldapActiveDirectory;
 class ActiveDirectory extends AdldapActiveDirectory
 {
     /**
+     * Get the name of an LDAP attribute for a local User attribute
+     *
+     * @param string $attribute
+     * @param string $default
+     * @return string
+     */
+    public function configNameFor($attribute, $default = null)
+    {
+        return config('adldap_sync.attributes')[$attribute] ?? $default ?? $attribute;
+    }
+
+    /**
+     * Get the name of the LDAP attribute used for login
+     *
+     * @return string
+     */
+    public function loginName()
+    {
+        return config('adldap_auth.usernames.ldap', 'samaccountname');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function accountName()
     {
-        return 'samaccountname';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function accountType()
-    {
-        return 'samaccounttype';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function commonName()
-    {
-        return 'cn';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function company()
-    {
-        return 'college';
+        return $this->configNameFor('name', 'sammacountname');
     }
 
     /**
@@ -48,7 +46,7 @@ class ActiveDirectory extends AdldapActiveDirectory
      */
     public function department()
     {
-        return 'dept';
+        return $this->configNameFor('department');
     }
 
     /**
@@ -56,39 +54,7 @@ class ActiveDirectory extends AdldapActiveDirectory
      */
     public function displayName()
     {
-        return 'displayName';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function email()
-    {
-        return 'mail';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function emailNickname()
-    {
-        return 'pea';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function employeeId()
-    {
-        return 'jamsid';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function employeeNumber()
-    {
-        return 'uidNumber';
+        return $this->configNameFor('display_name', 'displaynameprintable');
     }
 
     /**
@@ -96,71 +62,54 @@ class ActiveDirectory extends AdldapActiveDirectory
      */
     public function firstName()
     {
-        return 'givenName';
+        return $this->configNameFor('firstname', 'givenname');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function member()
+    public function lastName()
     {
-        return 'member';
+        return $this->configNameFor('lastname', 'sn');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function memberOf()
+    public function email()
     {
-        return 'memberof';
+        return $this->configNameFor('email', 'mail');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function name()
+    public function emailNickname()
+    {
+        return $this->configNameFor('pea', 'mailnickname');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function title()
+    {
+        return $this->configNameFor('title');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function college()
+    {
+        return $this->configNameFor('college', 'school');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function employeeNumber()
     {
         return 'name';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function objectCategory()
-    {
-        return 'objectclass';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function objectCategoryPerson()
-    {
-        return 'person';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function objectClass()
-    {
-        return 'objectclass';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function objectClassPerson()
-    {
-        return 'inetorgperson';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function otherMailbox()
-    {
-        return 'pea';
-    }
-
 }

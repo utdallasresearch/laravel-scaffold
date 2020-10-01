@@ -202,7 +202,7 @@ return [
                 |
                 */
 
-                'use_ssl' => false,
+                'use_ssl' => env('ADLDAP_SSL', true),
                 'use_tls' => env('ADLDAP_TLS', false),
 
             ],
