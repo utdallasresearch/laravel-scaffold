@@ -6,7 +6,7 @@ This is a scaffolding for getting a basic Laravel app up and running with some c
 
 ## Installation
 
-- First, make sure you have the [prerequisites for Laravel](https://laravel.com/docs/5.4/installation#server-requirements).
+- First, make sure you have the [prerequisites for Laravel](https://laravel.com/docs/5.5/installation#server-requirements).
 
 - Clone the project:
 
